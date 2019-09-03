@@ -1,4 +1,4 @@
-package com.fjf;
+package com.fjf.IterationAndRecursion;
 
 /**
  * 变态跳台阶

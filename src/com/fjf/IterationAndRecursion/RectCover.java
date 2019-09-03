@@ -1,4 +1,4 @@
-package com.fjf;
+package com.fjf.IterationAndRecursion;
 
 /**
  * 我们可以用2*1的小矩形横着或者竖着去覆盖更大的矩形。
