@@ -44,18 +44,18 @@ public class Main {
         //endTestBitOperation
         //startIntegrality
 //        System.out.println(Power.Power(3.3,4));
-       /* int [] array = {1,2,3,4,5,6,7,8};
+        int [] array = {1,2,3,4,5,6,7,8};
         ReOrderArray.reOrderArray(array);
         for (int i = 0; i <array.length ; i++) {
             System.out.println(array[i]);
-        }*/
+        }
         //endIntegrality
         //start quick_sort
-        int [] array = {6,1,2,7,9,3,4,5,10,8};
-        Sort.quick_sort(array,0,array.length);
+       /* int [] array = {6,1,2,7,9,3,4,5,10,8};
+        Sort.quick_sort(array,0,array.length-1);
         for (int i = 0; i < array.length; i++) {
             System.out.println(i);
-        }
+        }*/
         //end quick_sort
     }
 }
