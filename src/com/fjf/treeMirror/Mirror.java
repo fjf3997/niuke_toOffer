@@ -23,6 +23,7 @@ public class Mirror {
         if(root==null)
             return;
         TreeNode temp;
+        //非递归实现
         Stack<TreeNode> stack = new Stack<>();
         stack.push(root);
         while(!stack.isEmpty()){
