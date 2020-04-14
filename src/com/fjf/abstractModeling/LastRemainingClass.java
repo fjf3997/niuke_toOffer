@@ -12,6 +12,8 @@ public class LastRemainingClass {
                 arr[p]=false;
                 p++;
             }
+            current=(++current)%m;
+            p=(++p)%n;
 
         }
         return 0;
