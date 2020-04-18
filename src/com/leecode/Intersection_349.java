@@ -19,7 +19,7 @@ import java.util.*;
  * 我们可以不考虑输出结果的顺序。
  *
  */
-public class IntersectionClass {
+public class Intersection_349 {
     public int[] intersection(int[] nums1, int[] nums2) {
         Set<Integer> set = new HashSet<>();
         for(int i=0;i<nums1.length;i++){
@@ -42,7 +42,7 @@ public class IntersectionClass {
     public static void main(String[] args) {
         int [] nums1 = {4,9,5};
         int [] nums2 = {9,4,9,8,4};
-        int [] res = new IntersectionClass().intersection(nums1,nums2);
+        int [] res = new Intersection_349().intersection(nums1,nums2);
         for (int re : res) {
             System.out.print(re+"  ");
         }

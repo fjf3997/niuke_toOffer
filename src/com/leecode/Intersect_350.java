@@ -26,7 +26,7 @@ import java.util.Map;
  * 如果 nums2 的元素存储在磁盘上，磁盘内存是有限的，并且你不能一次加载所有的元素到内存中，你该怎么办？
  *
  */
-public class IntersectClass {
+public class Intersect_350 {
     public int[] intersect(int[] nums1, int[] nums2) {
         Map<Integer,Integer> map = new HashMap<>();
         for (int i : nums1) {
@@ -57,7 +57,7 @@ public class IntersectClass {
     public static void main(String[] args) {
         int [] nums1 = {4,9,5};
         int [] nums2 = {9,4,9,8,4};
-        int [] res = new IntersectClass().intersect(nums1,nums2);
+        int [] res = new Intersect_350().intersect(nums1,nums2);
         for (int re : res) {
             System.out.print(re+"  ");
         }
