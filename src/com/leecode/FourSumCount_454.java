@@ -40,7 +40,28 @@ public class FourSumCount_454 {
                     map.put(ab,1);
             }
         }
+        for (int i : C) {
+            for (int j : D) {
+                int cd = -i-j;
+                if(map.containsKey(cd))
+                    res+=map.get(cd);
 
-        return 0;
+            }
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+        /**
+         *  * A = [ 1, 2]
+         *  * B = [-2,-1]
+         *  * C = [-1, 2]
+         *  * D = [ 0, 2]
+         */
+        int [] A = {1,2};
+        int [] B = {-2,-1};
+        int [] C = {-1,2};
+        int [] D = {0,2};
+        System.out.println(new FourSumCount_454().fourSumCount(A,B,C,D));
     }
 }
