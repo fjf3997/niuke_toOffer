@@ -49,7 +49,9 @@ public class ReverseBetween_92 {
     }
 
     public static void main(String[] args) {
-        ListNode node1 = new ListNode(1);
+        int [] arr = {1,2,3,4,5};
+        ListNode node1 = new ListNode(arr);
+        /*ListNode node1 = new ListNode(1);
         ListNode node2 = new ListNode(2);
         ListNode node3 = new ListNode(3);
         ListNode node4 = new ListNode(4);
@@ -57,8 +59,8 @@ public class ReverseBetween_92 {
         node1.next = node2;
         node2.next = node3;
         node3.next = node4;
-        node4.next = node5;
-        ListNode res = new ReverseBetween_92().reverseBetween(node1,1,4);
+        node4.next = node5;*/
+        ListNode res = new ReverseBetween_92().reverseBetween(node1,2,4);
         ListNode node = res;
         while (node!=null){
             System.out.println(node.val);
