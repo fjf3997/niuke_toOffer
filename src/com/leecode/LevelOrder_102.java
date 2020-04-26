@@ -54,11 +54,4 @@ public class LevelOrder_102 {
         return res;
     }
 }
-class Pair<T,L>{
-    public T first;
-    public L second;
-    public Pair(T t,L l){
-        first=t;
-        second=l;
-    }
-}
+
