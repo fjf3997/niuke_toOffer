@@ -40,7 +40,7 @@ public class Combine_77 {
             lists.add((List<Integer>) p.clone());
             return;
         }
-        for(int i = start;i<=n;i++){
+        for(int i = start;i<=n-(k-p.size())+1;i++){
             p.addLast(i);
             generateCombination(n,k,i+1,p);
             p.removeLast();
