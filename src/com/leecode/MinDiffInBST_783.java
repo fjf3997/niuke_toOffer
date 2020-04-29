@@ -49,9 +49,6 @@ public class MinDiffInBST_783 {
         }
         pre = root.val;
         dfs(root.right);
-
-
-
     }
 
 
