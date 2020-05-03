@@ -1,5 +1,6 @@
 package com.leecode;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -22,6 +23,22 @@ import java.util.Queue;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class NumSquares_279 {
+    //动态规划求解
+    public int numSquares2(int n){
+        int []memo = new int[n+1];
+        Arrays.fill(memo,Integer.MAX_VALUE);
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=Math.ceil(Math.sqrt(i));j++){
+                if(i-j*j>0)
+                    memo[i]=Math.min(memo[i],memo[i-j*j]+1);
+                else if(i==j*j)
+                    memo[i]=1;
+                else
+                    break;
+            }
+        }
+        return memo[n];
+    }
     public int numSquares(int n) {
         Queue<Pair<Integer,Integer>> queue = new LinkedList<>();
         Pair<Integer,Integer> pair = new Pair<>(n,0);
@@ -52,6 +69,6 @@ public class NumSquares_279 {
     }
 
     public static void main(String[] args) {
-        System.out.println(new NumSquares_279().numSquares(7));
+        System.out.println(new NumSquares_279().numSquares2(13));
     }
 }
