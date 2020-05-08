@@ -18,7 +18,22 @@ package com.SwordToOffer;
  */
 public class MyPow_16 {
     public double myPow(double x, int n) {
-        if(n==1||n==-1)
+        if(x==0)
+            return 0;
+        long b = n;
+        if(n<0){
+            x = 1/x;
+            b = -b;
+        }
+        double res = 1;
+        while (b>0){
+            if((b&1)==1)
+                res *=x;
+            x *=x;
+            b>>=1;
+        }
+        return res;
+       /* if(n==1||n==-1)
             return n<0?1/n:n;
         double res=x;
         int nn = n<0?-n:n;
@@ -30,7 +45,7 @@ public class MyPow_16 {
         for(int j=1;j<=k;j++){
             res*=x;
         }
-        return n<0?1/res:res;
+        return n<0?1/res:res;*/
     }
 
     public static void main(String[] args) {
