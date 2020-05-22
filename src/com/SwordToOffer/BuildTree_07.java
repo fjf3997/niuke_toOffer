@@ -22,6 +22,7 @@ import java.util.HashMap;
  * 链接：https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
+//https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof/solution/mian-shi-ti-07-zhong-jian-er-cha-shu-di-gui-fa-qin/
 public class BuildTree_07 {
     private HashMap<Integer,Integer> map;
     private int[] preorder;
@@ -41,7 +42,7 @@ public class BuildTree_07 {
         TreeNode root = new TreeNode(this.preorder[pre_root]);
         int in_root = map.get(root.val);
         root.left = recursion(pre_root+1,in_left,in_root-1);
-        root.right = recursion(pre_root+in_root-in_left+1,in_root+1,in_right);
+        root.right = recursion(pre_root+in_root-in_left+1,in_root+1,in_right);//右子树跟的节点索引
         return root;
     }
 
