@@ -30,15 +30,23 @@ public class Rob_198 {
             return 0;
         }
         Arrays.fill(memo,-1);
-        //记忆化搜索
+        // 记忆化搜索
        /* return startRob(nums,0);*/
-        memo[n-1]=nums[n-1];
+        //从后往前
+       /* memo[n-1]=nums[n-1];
         for(int i=n-2;i>=0;i--){
             for(int j=i;j<n;j++){
                 memo[i]=Math.max(memo[i],nums[j]+(j+2<n?memo[j+2]:0));
             }
         }
-        return memo[0];
+        return memo[0];*/
+        // 从前往后
+        memo[0] = 0;
+        memo[1] = nums[0];
+        for(int i = 2; i <= n;i++){
+            memo[i] = Math.max(memo[i-1],memo[i-2]+nums[i]);
+        }
+        return memo[n];
 
     }
     private int startRob(int []nums,int index){

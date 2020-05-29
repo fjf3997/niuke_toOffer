@@ -12,6 +12,7 @@ import java.util.Map;
  */
 public class LengthOfLongestSubstring_48 {
     public int lengthOfLongestSubstring(String s) {
+        //todo
         Map<Character, Integer> dic = new HashMap<>();
         int res = 0, tmp = 0;
         for(int j = 0; j < s.length(); j++) {
