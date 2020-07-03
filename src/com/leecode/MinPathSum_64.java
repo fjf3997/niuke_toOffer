@@ -19,22 +19,39 @@ package com.leecode;
  */
 public class MinPathSum_64 {
     public int minPathSum(int[][] grid) {
-        int row = grid.length;
-        if(row==0)
+        int[][] dp = new int[grid.length][grid[0].length];
+        dp[0][0] = grid[0][0];
+        for(int i=1;i<dp.length;i++){
+            dp[i][0] = dp[i-1][0]+grid[i][0];
+        }
+        for(int i=1;i<dp[0].length;i++){
+            dp[0][i] = dp[0][i-1]+grid[0][i];
+        }
+
+        for(int i=1;i<dp.length;i++){
+            for(int j=1;j<dp[0].length;j++){
+                dp[i][j] = Math.min(dp[i][j-1],dp[i-1][j]) + grid[i][j];
+            }
+        }
+        return dp[dp.length-1][dp[0].length-1];
+       /* int row = grid.length;
+        if(row==0) {
             return 0;
+        }
         int col = grid[0].length;
         for(int i=col-1;i-1>=0;i--){
             grid[row-1][i-1]+=grid[row-1][i];
         }
-        if(row==1)
+        if(row==1) {
             return grid[0][0];
+        }
         for(int i=row-2;i>=0;i--){
             grid[i][col-1]+=grid[i+1][col-1];
             for(int j=col-2;j>=0;j--){
                 grid[i][j]+=Math.min(grid[i+1][j],grid[i][j+1]);
             }
         }
-        return grid[0][0];
+        return grid[0][0];*/
     }
 
     public static void main(String[] args) {
