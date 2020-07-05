@@ -2,6 +2,7 @@ package com.leecode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 给定一个三角形，找出自顶向下的最小路径和。每一步只能移动到下一行中相邻的结点上。
@@ -22,14 +23,28 @@ import java.util.List;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class MinimumTotal_120 {
+    private int row;
+    private List<List<Integer>> lists;
+    private int count=0;
     public int minimumTotal(List<List<Integer>> triangle) {
         int n = triangle.size();
-        for(int i=n-2;i>=0;i--){
+        this.row = n;
+        this.lists = triangle;
+        /*for(int i=n-2;i>=0;i--){
             for(int j=0;j<=triangle.get(i).size()-1;j++){
                 triangle.get(i).set(j,triangle.get(i).get(j)+Math.min(triangle.get(i+1).get(j),triangle.get(i+1).get(j+1)));
             }
         }
-        return triangle.get(0).get(0);
+        return triangle.get(0).get(0);*/
+        // 递归
+        return recursion(0,0);
+    }
+    private int recursion(int level,int index){
+        count++;
+        if(level == row-1){
+            return lists.get(level).get(index);
+        }
+        return lists.get(level).get(index)+Math.min(recursion(level+1,index),recursion(level+1,index+1));
     }
 
     public static void main(String[] args) {
@@ -46,7 +61,9 @@ public class MinimumTotal_120 {
         lists.add(list1);
         lists.add(list2);
         lists.add(list3);
-        System.out.println(new MinimumTotal_120().minimumTotal(lists));
+        MinimumTotal_120 min = new MinimumTotal_120();
+        System.out.println(min.minimumTotal(lists));
+        System.out.println(min.count);
 
 
     }

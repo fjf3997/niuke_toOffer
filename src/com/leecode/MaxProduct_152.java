@@ -17,7 +17,35 @@ package com.leecode;
 public class MaxProduct_152 {
     //https://leetcode-cn.com/problems/maximum-product-subarray/solution/cheng-ji-zui-da-zi-shu-zu-by-leetcode-solution/
     public int maxProduct(int[] nums) {
-        int imax = nums[0],imin=nums[0],res = nums[0];
+        // 动态规划
+        //状态
+//        dp[i][j]：以 nums[i] 结尾的连续子数组的最值，计算最大值还是最小值由 j 来表示，j 就两个值；
+//        当 j = 0 的时候，表示计算的是最小值；
+//        当 j = 1 的时候，表示计算的是最大值。
+
+        int[][] dp = new int[nums.length][2];
+        //初始值
+        dp[0][0] = nums[0];
+        dp[0][1] = nums[0];
+        //状态转移
+        for(int i=1;i<nums.length;i++){
+            if(nums[i]>=0){
+                dp[i][0] = Math.min(dp[i-1][0]*nums[i],nums[i]);
+                dp[i][1] = Math.max(dp[i-1][1]*nums[i],nums[i]);
+            }else {
+                dp[i][0] = Math.min(dp[i-1][1]*nums[i],nums[i]);
+                dp[i][1] = Math.max(dp[i-1][0]*nums[i],nums[i]);
+            }
+        }
+        int res = dp[0][1];
+        for(int i=1;i<nums.length;i++){
+            res = Math.max(res,dp[i][1]);
+        }
+        return res;
+
+       /*
+       // 奇淫技巧
+       int imax = nums[0],imin=nums[0],res = nums[0];
         for(int i =1;i<nums.length;i++){
             int min = imin;
             int max = imax;
@@ -25,7 +53,7 @@ public class MaxProduct_152 {
             imin = min3(max*nums[i],min*nums[i],nums[i]);
             res = Math.max(imax,res);
         }
-        return res;
+        return res;*/
     }
     private int max3(int a,int b,int c){
         return Math.max(a,Math.max(b,c));
