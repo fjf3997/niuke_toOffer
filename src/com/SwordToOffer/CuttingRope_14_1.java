@@ -3,7 +3,8 @@ package com.SwordToOffer;
 import java.util.Arrays;
 
 /**
- * 给你一根长度为 n 的绳子，请把绳子剪成整数长度的 m 段（m、n都是整数，n>1并且m>1），每段绳子的长度记为 k[0],k[1]...k[m] 。请问 k[0]*k[1]*...*k[m] 可能的最大乘积是多少？例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18。
+ * 给你一根长度为 n 的绳子，请把绳子剪成整数长度的 m 段（m、n都是整数，n>1并且m>1），每段绳子的长度记为 k[0],k[1]...k[m] 。
+ * 请问 k[0]*k[1]*...*k[m] 可能的最大乘积是多少？例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18。
  * 示例 1：
  * 输入: 2
  * 输出: 1
@@ -27,8 +28,23 @@ public class CuttingRope_14_1 {
     public int cuttingRope(int n) {
         memo = new int[n+1];
         Arrays.fill(memo,-1);
+        // 动态规划
+        // 状态
+        long [] dp = new long[n+1];
+        // 初始化
+        dp[1] = dp[2] = 1;
+        // 状态转移
+        // dp[i] = Max(1<=j<=i-1){dp[i-j]*j,j*(i-j)}
+        for(int i=3;i<=n;i++){
+            for(int j=1;j<=i-1;j++){
+                dp[i] = Math.max(dp[i],Math.max(j*dp[i-j],j*(i-j)));
+            }
+        }
+        return Long.valueOf(dp[n]).intValue();
+       /* 记忆化搜索
+
         memo[1] = memo[2] = 1;
-        return cuttingRopeHelper(n);
+        return cuttingRopeHelper(n);*/
 
     }
 
