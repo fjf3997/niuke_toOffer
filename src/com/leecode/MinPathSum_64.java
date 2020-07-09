@@ -19,21 +19,35 @@ package com.leecode;
  */
 public class MinPathSum_64 {
     public int minPathSum(int[][] grid) {
-        int[][] dp = new int[grid.length][grid[0].length];
+        int m = grid.length;
+        if(m==0){
+            return 0;
+        }
+        int n = grid[0].length;
+        if(n==0){
+            return 0;
+        }
+        int[][] dp = new int[2][n];
+        // 使用滚动数组
+        int now = 1;
+        int old = now;
         dp[0][0] = grid[0][0];
-        for(int i=1;i<dp.length;i++){
-            dp[i][0] = dp[i-1][0]+grid[i][0];
-        }
-        for(int i=1;i<dp[0].length;i++){
-            dp[0][i] = dp[0][i-1]+grid[0][i];
-        }
-
-        for(int i=1;i<dp.length;i++){
-            for(int j=1;j<dp[0].length;j++){
-                dp[i][j] = Math.min(dp[i][j-1],dp[i-1][j]) + grid[i][j];
+        for(int i=0;i<m;i++){
+            old = now;
+            now = 1-now;
+            for(int j=0;j<n;j++){
+                if(i==0&&j>0){
+                    dp[now][j] = dp[now][j-1] + grid[i][j];
+                }
+                if(j==0&&i>0){
+                    dp[now][j] = dp[old][j] + grid[i][j];
+                }
+                if(i>0&&j>0){
+                    dp[now][j] = Math.min(dp[now][j-1],dp[old][j]) + grid[i][j];
+                }
             }
         }
-        return dp[dp.length-1][dp[0].length-1];
+        return dp[now][n-1];
        /* int row = grid.length;
         if(row==0) {
             return 0;
