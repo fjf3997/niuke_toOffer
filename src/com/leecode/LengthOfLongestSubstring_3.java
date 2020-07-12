@@ -22,6 +22,29 @@ package com.leecode;
  *
  */
 public class LengthOfLongestSubstring_3 {
+    public int lengthOfLongestSubstring2(String s) {
+        // 时间复杂度为O(n)
+        // 同209题,j不用回退,实际时间复杂度为O(2n)
+        /**
+         * 模板代码为:
+         * for(i=0;i<s.length();i++){
+         *             while (j<s.length()&&map[s.charAt(j)]==0){}
+         * 根据题目条件&& 后的代码不同
+         */
+        int i = 0;
+        int j = 0;
+        int res = 0;
+        int [] map = new int[256];
+        for(i=0;i<s.length();i++){
+            while (j<s.length()&&map[s.charAt(j)]==0){
+                map[s.charAt(j)]=1;
+                res = Math.max(res,j-i+1);
+                j++;
+            }
+            map[s.charAt(i)]=0;
+        }
+        return res;
+    }
     public int lengthOfLongestSubstring(String s) {
         int l=0,r=-1;
         int res=0;
@@ -43,6 +66,6 @@ public class LengthOfLongestSubstring_3 {
     }
 
     public static void main(String[] args) {
-        System.out.println(new LengthOfLongestSubstring_3().lengthOfLongestSubstring("abcabcbb"));
+        System.out.println(new LengthOfLongestSubstring_3().lengthOfLongestSubstring2("abcabcbb"));
     }
 }
