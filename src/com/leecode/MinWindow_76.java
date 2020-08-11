@@ -18,6 +18,8 @@ package com.leecode;
  */
 public class MinWindow_76 {
     public String minWindow(String s, String t) {
+        // O(n)
+        // j不用回退,同LengthOfLongestSubstring_3,MinSubArrayLen_209
         int res = Integer.MAX_VALUE;
         String minStr = "";
         int [] sourceHash = new int[256];
