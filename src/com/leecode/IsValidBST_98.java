@@ -38,6 +38,18 @@ public class IsValidBST_98 {
         pre = Long.MIN_VALUE;
         return isBST(root);
     }
+    private boolean isValid(TreeNode root,TreeNode min,TreeNode max){
+        if(root==null){
+            return true;
+        }
+        if(min!=null&&root.val<=min.val){
+            return false;
+        }
+        if(max!=null&&root.val>=max.val){
+            return false;
+        }
+        return isValid(root.left,root,max)&&isValid(root.right,root,min);
+    }
     private boolean isBST(TreeNode root){
         if(root==null)
             return true;
