@@ -53,5 +53,23 @@ public class LevelOrder_102 {
         }
         return res;
     }
+    public List<List<Integer>> levelOrder2(TreeNode root) {
+        List<List<Integer>> list = new ArrayList<>();
+        recursion(root,list,0);
+        return list;
+    }
+
+    private void recursion(TreeNode root, List<List<Integer>> list, int depth) {
+        if(root==null){
+            return;
+        }
+        if(list.size()<=depth){
+            List<Integer> arrayList = new ArrayList<>();
+            list.add(arrayList);
+        }
+        list.get(depth).add(root.val);
+        recursion(root.left,list,depth+1);
+        recursion(root.right,list,depth+1);
+    }
 }
 
