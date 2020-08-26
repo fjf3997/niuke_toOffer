@@ -60,6 +60,19 @@ public class MaxProfit_121 {
         }
         return max;
     }
+    public int maxProfit2(int[] prices) {
+        if(prices.length==0){
+            return 0;
+        }
+        int res = 0;
+        int curMin = prices[0];
+        for(int i=1;i<prices.length;i++){
+            curMin = Math.min(curMin,prices[i]);
+            res = Math.max(res,prices[i]-curMin);
+        }
+        return res;
+
+    }
 
     public static void main(String[] args) {
         int [] arr = new int[]{7,1,5,3,6,4};
