@@ -43,7 +43,8 @@ public class MinWindow_76 {
     }
 
     public static void main(String[] args) {
-        System.out.println(new MinWindow_76().minWindow("ADOBECODEBANC","ABC"));
+//        System.out.println(new MinWindow_76().minWindow2("ADOBECODEBANC","ABC"));
+        System.out.println(new MinWindow_76().minWindow2("aa","aa"));
     }
 
     private boolean valid(int[] sourceHash, int[] targetHash) {
@@ -59,5 +60,44 @@ public class MinWindow_76 {
         for (int i=0;i<t.length();i++){
             targetHash[t.charAt(i)]++;
         }
+    }
+    public String minWindow2(String s, String t) {
+        int start = 0;
+        int left = 0,right = 0;
+        int [] window = new int[256];
+        int [] target = new int[256];
+        int match = 0;
+        int min = Integer.MAX_VALUE;
+        for(int i=0;i<t.length();i++){
+            target[t.charAt(i)]++;
+        }
+        String res = "";
+        while (right<s.length()){
+            char c = s.charAt(right);
+            if(target[c]!=0){
+                window[c]++;
+                if(window[c]<=target[c]){
+                    match++;
+                }
+            }
+            right++;
+            while (match==t.length()){
+                if(right-left<min){
+                    start = left;
+                    min = right-left;
+                }
+                char ch = s.charAt(left);
+                if(target[ch]!=0){
+                    window[ch]--;
+                    if(window[ch]<target[ch]){
+                        match--;
+                    }
+                }
+                left++;
+            }
+        }
+        res = min==Integer.MAX_VALUE?"": s.substring(start,start+min);
+        return res;
+
     }
 }

@@ -38,31 +38,45 @@ import java.util.List;
  *
  */
 public class FindAnagrams_438 {
-    private int[] freq = new int[122];
     public List<Integer> findAnagrams(String s, String p) {
-        List<Integer> list = new ArrayList<>();
-        int l=0;
+        List<Integer> ans = new ArrayList<>();
         int num = p.length();
-        int r = l+num-1;
-        for(int i=0;i<p.length();i++){
-            freq[p.charAt(i)]=1;
+        int [] window = new int[123];
+        int [] target = new int[123];
+        int match = 0;
+        for(int i=0;i<num;i++){
+            target[p.charAt(i)]++;
         }
-        for(;r<s.length()-1;l++,r++){
-            if(isAnagrams(s,l,r,p)){
-                list.add(l);
+        int left = 0,right = 0;
+        while (right<s.length()){
+            char c1 = s.charAt(right);
+            if(target[c1]!=0){
+                window[c1]++;
+                if(window[c1]<=target[c1]){
+                    match++;
+                }
+            }
+            right++;
+            while (match==num){
+                char c2 = s.charAt(left);
+                if(right-left==num){
+                    ans.add(left);
+                }
+                if(target[c2]!=0){
+                    window[c2]--;
+                    if(window[c2]<target[c2]){
+                        match--;
+                    }
+                }
+                left++;
             }
         }
-
-        return list;
-    }
-    private boolean isAnagrams(String s,int i,int j,String p){
-        assert j-i+1==p.length();
-        return true;
+        return ans;
 
     }
 
     public static void main(String[] args) {
-        List<Integer> list = new FindAnagrams_438().findAnagrams("cbaebabacd","abc");
+        List<Integer> list = new FindAnagrams_438().findAnagrams("baa","aa");
         for (Integer integer : list) {
             System.out.print(integer+"  ");
         }
