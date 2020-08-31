@@ -54,7 +54,6 @@ public class LengthOfLongestSubstring_3 {
                 r++;
                 freq[s.charAt(r)]++;
             }else {
-
                 freq[s.charAt(l)]--;
                 l++;
             }
@@ -63,6 +62,22 @@ public class LengthOfLongestSubstring_3 {
         }
         return res;
 
+    }
+    public int lengthOfLongestSubstring3(String s) {
+        int [] map = new int[256];
+        int l = 0,r=0;
+        int max = 0;
+        while (r<s.length()){
+            char c = s.charAt(r);
+            map[c] ++;
+            r++;
+            while (map[c]==2){
+                map[s.charAt(l)]--;
+                l++;
+            }
+            max = Math.max(max,r-l);
+        }
+        return max;
     }
 
     public static void main(String[] args) {
