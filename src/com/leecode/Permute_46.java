@@ -37,14 +37,17 @@ public class Permute_46 {
     private void generatePermute(int [] nums, int index, LinkedList<Integer> list){
         if(index==nums.length){
             lists.add((List<Integer>) list.clone());
+            System.out.println("结果里添加集合+"+list);
             return;
         }
         for(int i=0;i<nums.length;i++){
             if(!visited[i]){
                 visited[i]=true;
                 list.addLast(nums[i]);
+                System.out.println("remove前，list="+list);
                 generatePermute(nums,index+1,list);
                 list.removeLast();
+                System.out.println("remove后，list="+list);
                 visited[i]=false;
             }
         }

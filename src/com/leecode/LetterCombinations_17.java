@@ -111,6 +111,26 @@ public class LetterCombinations_17 {
 
         return;
     }
+    public List<String> letterCombinations2(String digits) {
+        List<String> list = new ArrayList();
+        if(digits.length()==0){
+            return list;
+        }
+        findCombination(digits,0,"",list);
+        return list;
+    }
+    private void findCombination(String digits, int index,String ret ,List<String> list){
+        if(index==digits.length()){
+            list.add(ret);
+            return;
+        }
+        char c = digits.charAt(index);
+        String str = letterMap[c-'0'];
+        for(int i=0;i<str.length();i++){
+            findCombination(digits,index+1,ret+str.charAt(i),list);
+        }
+
+    }
 
     private static void printList(List<String> list){
         for(String s: list)
@@ -119,6 +139,6 @@ public class LetterCombinations_17 {
 
     public static void main(String[] args) {
 
-        printList((new LetterCombinations_17()).letterCombinations("234"));
+        printList((new LetterCombinations_17()).letterCombinations2("234"));
     }
 }
