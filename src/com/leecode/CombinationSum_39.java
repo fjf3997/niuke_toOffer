@@ -1,5 +1,6 @@
 package com.leecode;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -59,11 +60,35 @@ public class CombinationSum_39 {
         }
 
     }
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        if(candidates.length==0||target==0){
+            return res;
+        }
+        generateCombinationSum2(candidates,target,0,0,new LinkedList<>(),res);
+        return res;
+    }
+
+    private void generateCombinationSum2(int[] candidates, int target, int sum, int start, LinkedList<Integer> integers, List<List<Integer>> res) {
+        if(sum>=target){
+            if(target==sum)
+                res.add((List<Integer>) integers.clone());
+            return;
+        }
+        for(int i=start;i<candidates.length;i++){
+            integers.addLast(candidates[i]);
+            sum += candidates[i];
+            generateCombinationSum2(candidates,target,sum,i,integers,res);
+            sum -= candidates[i];
+            integers.removeLast();
+        }
+    }
 
     public static void main(String[] args) {
         int [] arr = {2,3,6,7};
 
-        List<List<Integer>> lists = new CombinationSum_39().combinationSum(arr, 7);
+        List<List<Integer>> lists = new CombinationSum_39().combinationSum2(arr, 7);
+        System.out.println(lists);
         for (List<Integer> list : lists) {
             System.out.println(list);
 

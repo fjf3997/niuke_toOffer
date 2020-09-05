@@ -1,5 +1,7 @@
 package com.leecode;
 
+import java.util.ArrayList;
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -45,5 +47,29 @@ public class Combine_77 {
             generateCombination(n,k,i+1,p);
             p.removeLast();
         }
+    }
+    public List<List<Integer>> combine2(int n, int k) {
+        List<List<Integer>> res = new ArrayList();
+        if(n<=0||k<=0||k>n){
+            return res;
+        }
+        generateCombination2(n,k,1,new LinkedList<Integer>(),res);
+        return res;
+    }
+    private void generateCombination2(int n,int k,int start,LinkedList<Integer> deque,List<List<Integer>> res){
+        if(deque.size()==k){
+            res.add((List<Integer>) deque.clone());
+            return;
+        }
+        for(int i=start;i<=n;i++){
+            deque.addLast(i);
+            generateCombination2(n,k,i+1,deque,res);
+            deque.removeLast();
+        }
+    }
+
+
+    public static void main(String[] args) {
+        Deque deque =new LinkedList();
     }
 }
