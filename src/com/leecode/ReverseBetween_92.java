@@ -1,5 +1,6 @@
 package com.leecode;
 
+
 /**
  * 反转从位置 m 到 n 的链表。请使用一趟扫描完成反转。
  *
@@ -43,9 +44,32 @@ public class ReverseBetween_92 {
             cur = next;
         }
         m_pre.next = m_node;
-        n_node .next= n_next;
+        n_node.next= n_next;
         return head;
 
+    }
+    public ListNode reverseBetween2(ListNode head, int m, int n) {
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        ListNode pre = dummy;
+        ListNode cur = dummy;
+        ListNode mNode = dummy;
+        ListNode nNode = dummy;
+        for(int i=1;i<m;i++){
+            pre = pre.next;
+        }
+        mNode = pre.next;
+        for(int i=1;i<=n;i++){
+            nNode = nNode.next;
+        }
+        cur = mNode;
+        while (cur!=nNode.next){
+            ListNode next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        return dummy.next;
     }
 
     public static void main(String[] args) {

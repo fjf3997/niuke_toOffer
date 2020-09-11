@@ -40,8 +40,25 @@ public class UniquePaths_62 {
         }
         return dp[n-1][m-1];
     }
+    private int [][]memo;
+    public int uniquePaths2(int m, int n) {
+        memo = new int[m+1][n+1];
+        int res = recursion(m,n,m,n);
+        return res;
+    }
+
+    private int recursion(int m, int n,int i,int j) {
+        if(i==1||j==1){
+            memo[i][j] = 1;
+        }
+        if(memo[i][j]!=0){
+            return memo[i][j];
+        }
+        memo[i][j] =  recursion(m,n,i-1,j)+recursion(m,n,i,j-1);
+        return memo[i][j];
+    }
 
     public static void main(String[] args) {
-        System.out.println(new UniquePaths_62().uniquePaths(7,3));
+        System.out.println(new UniquePaths_62().uniquePaths2(7,3));
     }
 }

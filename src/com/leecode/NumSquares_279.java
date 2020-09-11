@@ -67,8 +67,33 @@ public class NumSquares_279 {
         }
         return 0;
     }
+    private int [] memo;
+    public int numSquares3(int n) {
+        memo = new int[n+1];
+        int res = recursion(n);
+        return res;
+    }
+
+    private int recursion(int n) {
+        int res = Integer.MAX_VALUE;
+        if(memo[n]!=0){
+            return memo[n];
+        }
+        for(int i=1;;i++){
+            if(i*i==n){
+                return 1;
+            }else if(i*i>n){
+                break;
+            }else {
+                res = Math.min(res,recursion(n-i*i)+1);
+            }
+        }
+        memo[n] = res;
+        return res;
+    }
+
 
     public static void main(String[] args) {
-        System.out.println(new NumSquares_279().numSquares2(13));
+        System.out.println(new NumSquares_279().numSquares3(2));
     }
 }

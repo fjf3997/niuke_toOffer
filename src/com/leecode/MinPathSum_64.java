@@ -67,6 +67,23 @@ public class MinPathSum_64 {
         }
         return grid[0][0];*/
     }
+    public int minPathSum2(int[][] grid) {
+        int row = grid.length;
+        int col = grid[0].length;
+        if(col==0){
+            return 0;
+        }
+        for(int i=col-2;i>=0;i--){
+            grid[row-1][i] += grid[row-1][i+1];
+        }
+        for(int i=row-2;i>=0;i--){
+            grid[i][col-1] += grid[i+1][col-1];
+            for(int j=col-2;j>=0;j--){
+                grid[i][j] += Math.min(grid[i+1][j],grid[i][j+1]);
+            }
+        }
+        return grid[0][0];
+    }
 
     public static void main(String[] args) {
         int [][] arr={
@@ -74,6 +91,6 @@ public class MinPathSum_64 {
             {1,5,1},
             {4,2,1}
         };
-        System.out.println(new MinPathSum_64().minPathSum(arr));
+        System.out.println(new MinPathSum_64().minPathSum2(arr));
     }
 }

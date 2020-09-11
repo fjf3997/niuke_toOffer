@@ -64,10 +64,37 @@ Rob_198 {
         memo[index]=res;
         return res;
     }
+    private int []memo2;
+    public int rob2(int[] nums) {
+        if(nums.length==0){
+            return 0;
+        }
+        memo2 = new int[nums.length];
+        Arrays.fill(memo2,-1);
+        // memo2[i]表示准备偷取[i,nums.length)的房子
+        recursion(nums,0);
+        return memo2[0];
+    }
+
+    private int recursion(int[] nums, int index) {
+        if(index>=nums.length){
+            return 0;
+        }
+        if(memo2[index]!=-1){
+            return memo2[index];
+        }
+        int res = 0;
+        for(int j=index;j<nums.length;j++){
+            res = Math.max(res,nums[j]+recursion(nums,j+2));
+        }
+        memo2[index] = res;
+        return res;
+    }
 
     public static void main(String[] args) {
         int [] arr = {1,2,3,1};
         int [] arr2 = {2,7,9,3,1};
-        System.out.println(new Rob_198().rob(arr2));
+        System.out.println(new Rob_198().rob2(arr2));
+//        System.out.println(new Rob_198().rob(arr2));
     }
 }

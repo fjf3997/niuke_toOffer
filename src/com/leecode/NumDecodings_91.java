@@ -50,9 +50,52 @@ public class NumDecodings_91 {
         }
         return dp[s.length()];
     }
+    private int[] memo;
+    public int numDecodings2(String s) {
+        memo = new int[s.length()+1];
+        int res = recursion(s);
+        return res;
+    }
+
+    private int recursion(String s) {
+        if(s.charAt(0)=='0'){
+            return 0;
+        }
+        int j = 1;
+        if(s.length()==2){
+            if(s.endsWith("0")&&s.charAt(s.length()-2)>='3'){
+                return 0;
+            }
+            j = (s.charAt(0)-'0')*10 + s.charAt(1)-'0';
+            if(j<=26&&j%10!=0){
+                return 2;
+            }else {
+                return 1;
+            }
+        }
+        if(s.length()==1){
+            return 1;
+        }
+
+        j = (s.charAt(0)-'0')*10 + s.charAt(1)-'0';
+        if(j<=26&&j>10){
+             memo[s.length()] = recursion(s.substring(1,s.length()))+recursion(s.substring(2,s.length()));
+        }else if(j==10){
+            memo[s.length()] = recursion(s.substring(2,s.length()));
+        }else {
+            memo[s.length()] = recursion(s.substring(1,s.length()));
+        }
+        return memo[s.length()];
+
+    }
 
     public static void main(String[] args) {
-        System.out.println(new NumDecodings_91().numDecodings("10"));
+//        System.out.println(new NumDecodings_91().numDecodings2("101"));
+        System.out.println(new NumDecodings_91().numDecodings2("12120"));
+        System.out.println(new NumDecodings_91().numDecodings2("7541387519572282368613553811323167125532172369624572591562685959575371877973171856836975137559677665"));
+        System.out.println(new NumDecodings_91().numDecodings2("230"));
+        System.out.println(new NumDecodings_91().numDecodings2("226"));
+        System.out.println(new NumDecodings_91().numDecodings2("100"));
         System.out.println(new NumDecodings_91().numDecodings("100"));
     }
 }

@@ -1,4 +1,7 @@
 package com.leecode;
+
+import java.util.*;
+
 /**
  * 给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。
  * 示例 1:
@@ -32,8 +35,35 @@ public class CoinChange_322 {
         return dp[amount];
 
     }
+    private int[]memo;
+    public int coinChange2(int[] coins, int amount) {
+        memo = new int[amount+1];
+        return recursion(coins,amount);
+    }
+
+    private int recursion(int[] coins, int amount) {
+        if(amount<0){
+            return -1;
+        }
+        if(amount==0){
+            return 0;
+        }
+        if(memo[amount]!=0){
+            return memo[amount];
+        }
+        int min = Integer.MAX_VALUE;
+        for(int i=0;i<coins.length;i++){
+            int res = recursion(coins,amount-coins[i]);
+            if(res>=0&&res<min){
+                min = res+1;
+            }
+        }
+        memo[amount] = min==Integer.MAX_VALUE?-1:min;
+        return memo[amount];
+    }
 
     public static void main(String[] args) {
-        System.out.println(new CoinChange_322().coinChange(new int[]{1,2,5},11));
+        System.out.println(new CoinChange_322().coinChange2(new int[]{1,2,5},9));
+        System.out.println(new CoinChange_322().coinChange2(new int[]{2},3));
     }
 }

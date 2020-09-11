@@ -57,14 +57,52 @@ public class UniquePathsWithObstacles_63 {
         }
         return dp[m-1][n-1];
     }
+    private int[][] memo;
+    public int uniquePathsWithObstacles2(int[][] obstacleGrid) {
+        int row = obstacleGrid.length;
+        int col = obstacleGrid[0].length;
+        if(row==0||col==0){
+            return 0;
+        }
+        memo = new int[row][col];
+        recursion(obstacleGrid,row-1,col-1);
+        return memo[row-1][col-1];
+    }
+
+    private int recursion(int[][] obstacleGrid, int row, int col) {
+        if(row==0&&col==0){
+            memo[row][col] = obstacleGrid[row][col]==0?1:0;
+        }
+        if(obstacleGrid[row][col]==1){
+            memo[row][col]=0;
+            return memo[row][col];
+        }
+        if(memo[row][col]!=0){
+            return memo[row][col];
+        }
+        if(row==0){
+            memo[row][col] = recursion(obstacleGrid,row,col-1);
+            return memo[row][col];
+        }
+        if(col==0){
+            memo[row][col] = recursion(obstacleGrid,row-1,col);
+            return memo[row][col];
+        }
+        memo[row][col] = recursion(obstacleGrid,row-1,col)+recursion(obstacleGrid,row,col-1);
+        return memo[row][col];
+
+    }
 
     public static void main(String[] args) {
         int [][] arr = new int[][]{
-            {0,0,0},
+            {1,0,0},
             {0,1,0},
             {0,0,0}
         };
-        System.out.println(new UniquePathsWithObstacles_63().uniquePathsWithObstacles(arr));
+        int [][] arr2 = new int[][]{
+                {0,1}
+        };
+        System.out.println(new UniquePathsWithObstacles_63().uniquePathsWithObstacles2(arr2));
 
     }
 }

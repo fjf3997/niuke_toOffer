@@ -40,6 +40,19 @@ public class IntegerBreak_343 {
         }
         return memo[n];
     }
+    public int integerBreak2(int n) {
+        if(n<=1){
+            return 0;
+        }
+        int[] memo = new int[n+1];
+        memo[1] = 1;
+        for(int i=2;i<=n;i++){
+            for (int j=1;j<=i-1;j++){
+                memo[i] = max3(memo[i],j*(i-j),j*memo[i-j]);
+            }
+        }
+        return memo[n];
+    }
 
     private int breakNum(int n) {
         if(n==1)
