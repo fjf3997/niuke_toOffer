@@ -27,9 +27,32 @@ public class LengthOfLongestSubstring_48 {
         }
         return res;
     }
+    public int lengthOfLongestSubstring2(String s) {
+        int max = 0;
+        int l = 0,r = 0;
+        int[] arr = new int[256];
+        while(r<s.length()){
+            char c = s.charAt(r);
+            if(arr[c]!=0){
+                while (arr[c]!=0){
+                    char ch = s.charAt(l);
+                    arr[ch]--;
+                    l++;
+                }
+            }
+            arr[c] = 1;
+            r++;
+            max = Math.max(max,r-l);
+        }
+        return max;
+    }
 
     public static void main(String[] args) {
-        String str = "abcabcbb";
-        System.out.println(new LengthOfLongestSubstring_48().lengthOfLongestSubstring(str));
+        String str = "pwwkew";
+        String str2 = "bbbbbb";
+        String str3 = "dvdf";
+        System.out.println(new LengthOfLongestSubstring_48().lengthOfLongestSubstring2(str3));
+        System.out.println(new LengthOfLongestSubstring_48().lengthOfLongestSubstring2(str2));
+        System.out.println(new LengthOfLongestSubstring_48().lengthOfLongestSubstring2(str));
     }
 }

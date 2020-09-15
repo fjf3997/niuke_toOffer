@@ -53,8 +53,24 @@ public class FindNthDigit_44 {
         int count = (int) Math.pow(10,digits-1);
         return 9*count;
     }
+    public int findNthDigit2(int n) {
+        long start = 1;
+        long end = 9;
+        int i = 1;
+        while(n>end){
+            n -= end;
+            start = start*10;
+            i++;
+            end = 9*start*i;
+        }
+        int no = (n-1)/i;
+        long num = start+no;
+        int j = (n-1)%i;
+        String str = String.valueOf(num);
+        return str.charAt(j) - '0';
+    }
 
     public static void main(String[] args) {
-        System.out.println(new FindNthDigit_44().findNthDigit(1000000000));
+        System.out.println(new FindNthDigit_44().findNthDigit2(19));
     }
 }
