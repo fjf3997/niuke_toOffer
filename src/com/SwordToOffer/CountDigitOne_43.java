@@ -35,7 +35,63 @@ public class CountDigitOne_43 {
         return res;
     }
 
+    /**
+     * 【1，n】
+     * n = 345[y]78
+     * 求y位出现1的次数
+     * （1）
+     * 000  00
+     * 001  01
+     * ... ..
+     * 344  99
+     * count += 345*100
+     * (2.1) digit>1
+     * count += 1*100
+     * (2.2) digit ==1
+     * count += 78
+     * (2.3) digit == 0
+     * count +=0
+     * 所以y位出现1的次数位count
+     * @param n
+     * @return
+     */
+    public int countDigitOne2(int n) {
+        String str = String.valueOf(n);
+        int num = str.length();
+        int count = 0;
+        // 求i位上1出现的次数
+        for(int i=0;i<num;i++){
+            // 高位，即【0-i）位上的值
+            int high = 0;
+            String highStr = str.substring(0, i);
+            if(highStr.length()!=0){
+                high = Integer.parseInt(highStr);
+            }
+            // 低位，即【i+，num）位上的值
+            String lowStr = str.substring(i+1,num);
+            int value = 1;
+            for(int j=0;j<lowStr.length();j++){
+                value*=10;
+            }
+            int low = 0;
+            if(lowStr.length()!=0){
+                low = Integer.parseInt(lowStr);
+            }
+            count += high*value;
+            // 当前位
+            int digit = str.charAt(i) - '0';
+            if(digit>1){
+                count+=value;
+            }else if(digit==1){
+                count+=low+1;
+            }
+        }
+        return count;
+
+
+    }
+
     public static void main(String[] args) {
-        System.out.println(new CountDigitOne_43().countDigitOne(13));
+        System.out.println(new CountDigitOne_43().countDigitOne2(1));
     }
 }
