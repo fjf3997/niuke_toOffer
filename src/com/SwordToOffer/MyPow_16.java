@@ -47,8 +47,30 @@ public class MyPow_16 {
         }
         return n<0?1/res:res;*/
     }
+    public double myPow2(double x, int n) {
+        if(n==0||x==1){
+            return 1.0;
+        }
+        return n<0?1/myPowHelper(x,-n):myPowHelper(x,n);
+    }
+    public double myPowHelper(double x,int n){
+        if(n==1){
+            return x;
+        }if(n==0){
+            return 1;
+        }
+
+        if(n%2==0){
+            double res = myPowHelper(x,n/2);
+            return res*res;
+        }else{
+            double res = myPowHelper(x,n/2);
+            return res*res*x;
+        }
+    }
 
     public static void main(String[] args) {
-        System.out.println(new MyPow_16().myPow(2.0,10));
+        System.out.println(new MyPow_16().myPow2(1.00000001,999999997));
+        System.out.println(Math.pow(1.00000001,999999997));
     }
 }
