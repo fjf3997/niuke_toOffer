@@ -44,8 +44,47 @@ public class IsNumber_20 {
         return numAppeared;
 
     }
+    public boolean isNumber2(String s) {
+        s = s.trim();
+        if(s.length()==0){
+            return false;
+        }
+        if(s.charAt(0)=='+'||s.charAt(0)=='-'){
+            s = s.substring(1);
+            if(s.length()==0)return false;// "+" "-"
+        }
+
+        int dot = 0,e = 0,length = s.length();
+        boolean num = false;
+        for(int i=0;i<length;i++){
+            char c = s.charAt(i);
+            if(c<='9'&&c>='0'){
+                num = true;
+                continue;
+            }else if(c=='.'){
+                dot++;
+                // 123.123.123 123. 123e1.1
+                if(dot>1||i==length-1||e>=1){
+                    return false;
+                }
+            }else if(c=='e'||c=='E'){
+                e++;
+                // 123e123e123 e123 123e .e
+                if(e>1||!num||i==length-1||i==0||s.charAt(i-1)=='.'){
+                    return false;
+                }
+            }else if(c=='+'||c=='-'){
+                if(i==0||s.charAt(i-1)!='e'||i==length-1)
+                    return false;
+            }else{
+                return false;
+            }
+        }
+        return true;
+    }
 
     public static void main(String[] args) {
         System.out.println(new IsNumber_20().isNumber("1.2.3"));
+        System.out.println(new IsNumber_20().isNumber2("12e"));
     }
 }
